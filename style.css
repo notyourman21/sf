@@ -1,0 +1,1178 @@
+/* =========================================
+   1. GLOBAL RESET AND BACKGROUND
+========================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  background:
+    radial-gradient(ellipse at 50% 78%,
+      rgba(255,210,235,.42), transparent 48%),
+    linear-gradient(180deg,
+      #f46caf 0%,
+      #f47db7 32%,
+      #f58fc2 52%,
+      #f7a3d0 72%,
+      #f9b6dc 88%,
+      #fbd0e8 100%);
+}
+
+/* =========================================
+   2. SKY AND CLOUDS
+========================================= */
+
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  background:
+    radial-gradient(ellipse at 50% 78%,
+      rgba(255,210,235,.42), transparent 48%),
+    linear-gradient(180deg,
+      #f46caf 0%,
+      #f47db7 32%,
+      #f58fc2 52%,
+      #f7a3d0 72%,
+      #f9b6dc 88%,
+      #fbd0e8 100%);
+}
+
+.sky::after {
+  content: "";
+  position: absolute;
+  width: min(700px, 130vw);
+  height: min(700px, 130vw);
+  left: 50%;
+  bottom: -115vw;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255,240,250,.65) 0%,
+    rgba(255,220,240,.35) 30%,
+    rgba(255,195,225,.15) 55%,
+    transparent 72%);
+}
+
+.cloud {
+  position: absolute;
+  width: 250px;
+  height: 70px;
+  border-radius: 100px;
+  background: rgba(255,255,255,.75);
+  filter: blur(20px);
+  opacity: .85;
+  box-shadow: 0 0 35px rgba(255,255,255,.25);
+}
+
+.cloud-one { top: 65%; left: -80px; }
+.cloud-two { top: 75%; right: -90px; }
+.cloud-three { top: 55%; left: 35%; }
+.cloud-four { top: 85%; left: 60%; }
+
+#cloudCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: .9;
+  pointer-events: none;
+}
+
+/* =========================================
+   3. WELCOME SCREEN
+========================================= */
+
+.main-content {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.welcome-section {
+  position: relative;
+  width: 100%;
+  max-width: 750px;
+  text-align: center;
+  color: white;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 4px;
+  margin-bottom: 22px;
+  opacity: .9;
+  color: #fff0e8;
+}
+
+.welcome-section h1 {
+  font-size: clamp(38px, 6vw, 68px);
+  font-weight: 500;
+  letter-spacing: -2px;
+  margin-bottom: 18px;
+  color: #fff7ef;
+}
+
+.subtitle {
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: .9;
+  margin-bottom: 38px;
+  color: #ffede2;
+}
+
+/* =========================================
+   4. WELCOME GLASS CARD
+========================================= */
+
+.glass-card {
+  width: 100%;
+  max-width: 430px;
+  margin: auto;
+  padding: 35px;
+  border-radius: 28px;
+  background: rgba(255,235,220,.16);
+  border: 1px solid rgba(255,239,220,.4);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 60px rgba(83,35,48,.2);
+}
+
+.glass-card label {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 15px;
+  color: #fff5ec;
+}
+
+.glass-card input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.45);
+  outline: none;
+  background: rgba(255,255,255,.16);
+  color: white;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+.glass-card input::placeholder {
+  color: rgba(255,245,235,.8);
+}
+
+.glass-card input:focus {
+  border-color: #fff1d5;
+  box-shadow: 0 0 15px rgba(255,220,180,.2);
+}
+
+.glass-card button {
+  padding: 14px 32px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,.6);
+  background: linear-gradient(135deg,#2878e8,#1455c0);
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform .22s ease, filter .16s ease;
+}
+
+.glass-card button:hover {
+  filter: brightness(1.12);
+}
+
+.glass-card button:active {
+  transform: scale(.94);
+}
+
+.glass-card button.clicked {
+  background: #fff5e8;
+  color: #a65361;
+  border-color: white;
+  animation: applePop .5s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes applePop {
+  0% { transform: scale(1); }
+  35% { transform: scale(.92); }
+  65% { transform: scale(1.07); }
+  82% { transform: scale(.98); }
+  100% { transform: scale(1); }
+}
+
+/* =========================================
+   5. QUESTION SCENE
+========================================= */
+
+.second-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(.97);
+
+  transition:
+    opacity .6s ease,
+    transform .7s cubic-bezier(.2,.8,.2,1),
+    visibility .7s;
+}
+
+.second-scene.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* =========================================
+   6. FLOATING HEARTS - RISING ORBIT EFFECT
+========================================= */
+
+.floating-decor {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.float-heart {
+  position: absolute;
+  display: block;
+  bottom: -45px;
+  left: var(--heart-left);
+  font-size: 19px;
+  line-height: 1;
+  pointer-events: none;
+
+  opacity: 0;
+  will-change: transform, opacity;
+
+  animation: heartOrbitRise var(--heart-duration) linear infinite;
+  animation-delay: var(--heart-delay);
+}
+
+/* Different curved paths around the question card */
+
+.h1  { --heart-left: 34%; --heart-duration: 10s; --heart-delay: -2s;  --heart-sway: 55px; }
+.h2  { --heart-left: 44%; --heart-duration: 12s; --heart-delay: -8s;  --heart-sway: -65px; }
+.h3  { --heart-left: 55%; --heart-duration: 9s;  --heart-delay: -4s;  --heart-sway: 45px; }
+.h4  { --heart-left: 65%; --heart-duration: 11s; --heart-delay: -7s;  --heart-sway: -55px; }
+
+.h5  { --heart-left: 39%; --heart-duration: 13s; --heart-delay: -10s; --heart-sway: 70px; }
+.h6  { --heart-left: 59%; --heart-duration: 10s; --heart-delay: -5s;  --heart-sway: -45px; }
+.h7  { --heart-left: 49%; --heart-duration: 12s; --heart-delay: -9s;  --heart-sway: 60px; }
+
+.h8  { --heart-left: 29%; --heart-duration: 11s; --heart-delay: -3s;  --heart-sway: 50px; }
+.h9  { --heart-left: 69%; --heart-duration: 13s; --heart-delay: -11s; --heart-sway: -60px; }
+.h10 { --heart-left: 36%; --heart-duration: 9s;  --heart-delay: -6s;  --heart-sway: 65px; }
+.h11 { --heart-left: 63%; --heart-duration: 12s; --heart-delay: -1s;  --heart-sway: -50px; }
+
+.h12 { --heart-left: 47%; --heart-duration: 10s; --heart-delay: -7s;  --heart-sway: 55px; }
+.h13 { --heart-left: 25%; --heart-duration: 14s; --heart-delay: -12s; --heart-sway: 70px; }
+.h14 { --heart-left: 73%; --heart-duration: 11s; --heart-delay: -5s;  --heart-sway: -70px; }
+
+/* Smooth curved upward movement */
+
+@keyframes heartOrbitRise {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(.65);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: .85;
+  }
+
+  25% {
+    transform: translate3d(var(--heart-sway), -25vh, 0) rotate(100deg) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate3d(calc(var(--heart-sway) * -0.65), -50vh, 0) rotate(200deg) scale(.9);
+    opacity: .9;
+  }
+
+  75% {
+    transform: translate3d(var(--heart-sway), -75vh, 0) rotate(300deg) scale(1.05);
+    opacity: .8;
+  }
+
+  100% {
+    transform: translate3d(0, -110vh, 0) rotate(360deg) scale(.7);
+    opacity: 0;
+  }
+}
+
+/* Teddy bears */
+
+.bear {
+  position: absolute;
+  top: 50%;
+  font-size: 34px;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 10;
+  filter: drop-shadow(0 5px 8px rgba(20,20,70,.15));
+  animation: teddySmooth 2.4s ease-in-out infinite;
+}
+
+.bear-left {
+  left: max(4px, calc(50% - 230px));
+  animation-delay: 0s;
+}
+
+.bear-right {
+  right: max(4px, calc(50% - 230px));
+  animation-delay: -1.2s;
+}
+
+@keyframes teddySmooth {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -9px; }
+}
+
+/* =========================================
+   7. LIQUID GLASS QUESTION CARD
+========================================= */
+
+.question-card {
+  position: relative;
+  z-index: 2;
+  width: min(390px, 94vw);
+  min-height: 0;
+  margin: auto;
+  padding: 25px 22px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  background: rgba(255,235,220,.17);
+  border: 1px solid rgba(255,239,220,.4);
+  border-radius: 30px;
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  box-shadow: 0 20px 60px rgba(83,35,48,.2);
+
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.question-number {
+  color: #fff5ec;
+  font-size: 11px;
+  letter-spacing: 4px;
+  opacity: .9;
+  text-align: center;
+}
+
+.question-card h2 {
+  color: #fffaf4;
+  font-size: clamp(21px,5vw,28px);
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* =========================================
+   8. ANSWER BUTTONS
+========================================= */
+
+.answer-options {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.answer-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 16px;
+  color: white;
+  font-size: 15px;
+  background: rgba(255,235,220,.19);
+  border: 1px solid rgba(255,245,235,.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: transform .22s ease, background .2s ease;
+}
+
+.answer-btn:hover {
+  background: rgba(255,245,230,.32);
+  transform: scale(1.025);
+}
+
+.answer-btn:active {
+  transform: scale(.95);
+}
+
+/* Yes heartbeat */
+
+#yesBtn, #loveYes {
+  animation: heartbeatSmooth 1.35s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes heartbeatSmooth {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.06); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.04); }
+  60% { transform: scale(1); }
+}
+
+/* =========================================
+   9. PERCENTAGE GAME
+========================================= */
+
+.percentage-game {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.percentage-game.show {
+  display: flex;
+}
+
+.percentage-game input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,.45);
+  outline: none;
+  background: rgba(255,235,220,.18);
+  color: white;
+  font-size: 16px;
+  text-align: center;
+}
+
+.percentage-game input::placeholder {
+  color: rgba(255,245,235,.8);
+}
+
+.percentage-game input:focus {
+  border-color: white;
+}
+
+/* =========================================
+   10. QUESTION THREE
+========================================= */
+
+.question-three {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.question-three.show {
+  display: flex;
+}
+
+/* =========================================
+   11. FINAL QUESTION
+========================================= */
+
+.final-question {
+  display: none;
+  width: 100%;
+  text-align: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.final-question.show {
+  display: flex;
+}
+
+.final-question h2 {
+  color: #fffaf4;
+  font-size: 27px;
+  line-height: 1.4;
+}
+
+.final-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* =========================================
+   12. FINAL NO BUTTON
+========================================= */
+
+#loveNo {
+  transition:
+    left .24s cubic-bezier(.2,.8,.2,1),
+    top .24s cubic-bezier(.2,.8,.2,1);
+  white-space: nowrap;
+  z-index: 10;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  #loveNo {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+  }
+}
+
+/* =========================================
+   13. CELEBRATION SCREEN
+========================================= */
+
+#fireworksCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.celebration-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(.96);
+  transition: opacity .5s ease, transform .5s ease, visibility .5s;
+}
+
+.celebration-screen.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.celebration-card {
+  width: min(440px,92vw);
+  padding: 36px 27px;
+  border-radius: 30px;
+  text-align: center;
+  color: #fffaf4;
+  background: rgba(255,235,220,.17);
+  border: 1px solid rgba(255,239,220,.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 22px 65px rgba(25,28,105,.22);
+  animation: celebrationPop .8s ease both;
+}
+
+.celebration-card h2 {
+  color: #fffaf4;
+  font-size: clamp(25px,6vw,34px);
+  margin-bottom: 12px;
+}
+
+.celebration-card p {
+  color: #fff3e9;
+  line-height: 1.65;
+}
+
+.celebration-sparkle {
+  font-size: 27px;
+  animation: heartsSmooth 2s infinite;
+  margin-bottom: 12px;
+}
+
+.celebration-caption {
+  margin-top: 12px;
+}
+
+.question-card.question-card-leaving {
+  opacity: 0;
+  transform: translateY(-12px) scale(.96);
+}
+
+@keyframes celebrationPop {
+  from { opacity: 0; transform: translateY(18px) scale(.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* =========================================
+   14. WELCOME PAGE TEDDY AND HEART DECOR
+========================================= */
+
+.welcome-decor {
+  position: relative;
+  width: 190px;
+  height: 55px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.welcome-bear {
+  font-size: 36px;
+  line-height: 1;
+  filter: drop-shadow(0 5px 7px rgba(100,30,70,.18));
+  animation: teddySmooth 2.4s ease-in-out infinite;
+}
+
+.welcome-heart {
+  position: absolute;
+  font-size: 17px;
+  animation: welcomeHeartFloat 1.8s ease-in-out infinite;
+}
+
+.heart-one {
+  left: 42%;
+  top: -8px;
+}
+
+.heart-two {
+  left: 57%;
+  top: 18px;
+  animation-delay: -.9s;
+}
+
+@keyframes welcomeHeartFloat {
+  0%, 100% {
+    transform: translateY(0) scale(.9);
+    opacity: .7;
+  }
+  50% {
+    transform: translateY(-9px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   15. CINEMATIC PINK AND BLUE LIQUID BUTTONS
+========================================= */
+
+.answer-btn.yes-btn,
+.answer-btn.no-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  flex: 1;
+  min-width: 0;
+  min-height: 100px;
+  padding: 14px 20px;
+
+  border-radius: 55px;
+  border: 2px solid rgba(255,255,255,.45);
+
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  transition:
+    transform .22s ease,
+    filter .2s ease,
+    box-shadow .2s ease;
+}
+
+/* PINK YES BUTTON */
+
+.answer-btn.yes-btn {
+  background: linear-gradient(
+    145deg,
+    #ff65b2 0%,
+    #ff2995 48%,
+    #ed238b 100%
+  );
+
+  box-shadow:
+    inset 0 3px 8px rgba(255,255,255,.4),
+    inset 0 -5px 12px rgba(180,0,90,.16),
+    0 10px 28px rgba(255,45,145,.3);
+}
+
+/* BLUE NO BUTTON */
+
+.answer-btn.no-btn {
+  background: linear-gradient(
+    145deg,
+    #48b5ff 0%,
+    #168eea 48%,
+    #08a9dc 100%
+  );
+
+  box-shadow:
+    inset 0 3px 8px rgba(255,255,255,.4),
+    inset 0 -5px 12px rgba(0,75,160,.16),
+    0 10px 28px rgba(30,150,255,.3);
+}
+
+/* BOTTOM LIQUID WATER */
+
+.answer-btn.yes-btn::after,
+.answer-btn.no-btn::after {
+  content: "";
+  position: absolute;
+  left: -5%;
+  bottom: -2px;
+  width: 110%;
+  height: 48%;
+  z-index: -1;
+  pointer-events: none;
+
+  border-radius: 50% 50% 0 0 / 28% 28% 0 0;
+
+  animation: referenceWater 3.5s ease-in-out infinite;
+}
+
+/* Light pink water */
+
+.answer-btn.yes-btn::after {
+  background:
+    radial-gradient(
+      ellipse at 30% 10%,
+      rgba(255,255,255,.75),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #ffacd5 0%,
+      #ff75b9 48%,
+      #ffc4e2 100%
+    );
+
+  box-shadow:
+    0 -5px 14px rgba(255,220,240,.35),
+    inset 0 3px 7px rgba(255,255,255,.35);
+}
+
+/* Light blue water */
+
+.answer-btn.no-btn::after {
+  background:
+    radial-gradient(
+      ellipse at 30% 10%,
+      rgba(255,255,255,.8),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #82d7ff 0%,
+      #48b5f5 48%,
+      #b8eaff 100%
+    );
+
+  box-shadow:
+    0 -5px 14px rgba(220,245,255,.4),
+    inset 0 3px 7px rgba(255,255,255,.35);
+}
+
+/* Smooth moving water surface */
+
+@keyframes referenceWater {
+  0%, 100% {
+    transform: translateY(5px) rotate(-1deg);
+    border-radius: 48% 52% 0 0 / 25% 30% 0 0;
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(1deg);
+    border-radius: 55% 45% 0 0 / 35% 22% 0 0;
+  }
+}
+
+/* Glass reflection */
+
+.answer-btn.yes-btn::before,
+.answer-btn.no-btn::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 7%;
+  left: 8%;
+  width: 84%;
+  height: 35%;
+  border-radius: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.28),
+    rgba(255,255,255,0)
+  );
+  pointer-events: none;
+}
+
+/* Button hover and press */
+
+.answer-btn.yes-btn:hover,
+.answer-btn.no-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.answer-btn.yes-btn:active,
+.answer-btn.no-btn:active {
+  transform: scale(.94);
+}
+
+/* Heart beside YES */
+
+.button-heart {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  margin-left: 5px;
+  font-size: 18px;
+  vertical-align: middle;
+  transform-origin: center;
+  animation: buttonHeartBeat 1.15s ease-in-out infinite;
+}
+
+@keyframes buttonHeartBeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.25); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.18); }
+  60% { transform: scale(1); }
+}
+
+/* Keep other answer buttons normal */
+
+.percentage-game .answer-btn:not(.yes-btn):not(.no-btn),
+.question-three .answer-btn:not(.yes-btn):not(.no-btn) {
+  border-radius: 16px;
+}
+
+/* =========================================
+   16. MOBILE RESPONSIVENESS
+========================================= */
+
+@media (max-width: 600px) {
+  .main-content {
+    padding: 20px;
+  }
+
+  .glass-card {
+    padding: 26px 20px;
+  }
+
+  .second-scene {
+    padding: 10px 0;
+  }
+
+  .question-card {
+    position: relative;
+    z-index: 2;
+  }
+
+  .question-card h2 {
+    font-size: clamp(19px,5.5vw,24px);
+  }
+
+  .answer-options,
+  .final-options {
+    gap: 9px;
+  }
+
+  .answer-btn {
+    padding: 13px 9px;
+    font-size: 14px;
+  }
+
+  .answer-btn.yes-btn,
+  .answer-btn.no-btn {
+    min-height: 88px;
+    padding: 12px 10px;
+    font-size: 14px;
+  }
+
+  .button-heart {
+    font-size: 17px;
+  }
+
+  .welcome-decor {
+    width: 175px;
+  }
+
+  .welcome-bear {
+    font-size: 32px;
+  }
+
+  .float-heart {
+    font-size: 15px;
+  }
+
+  .bear {
+    font-size: 27px;
+  }
+
+  /* Hearts stay around the question area */
+
+  .h1, .h6, .h12 { --heart-left: 30%; }
+  .h2, .h7, .h13 { --heart-left: 45%; }
+  .h3, .h8, .h14 { --heart-left: 60%; }
+  .h4, .h9, .h10, .h11 { --heart-left: 75%; }
+}
+
+/* Short phone screens */
+
+@media (max-height: 600px) {
+  .second-scene {
+    align-items: flex-start;
+  }
+
+  .question-card {
+    margin: 12px auto;
+    padding: 16px;
+    gap: 10px;
+  }
+}
+
+/* Reduced motion preference */
+
+@media (prefers-reduced-motion: reduce) {
+  .bear,
+  .float-heart,
+  #yesBtn,
+  #loveYes,
+  .celebration-sparkle,
+  .answer-btn.yes-btn::after,
+  .answer-btn.no-btn::after,
+  .button-heart {
+    animation: none !important;
+  }
+}
+
+/* Teddy foreground layer */
+
+.bear-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.bear-layer .bear {
+  z-index: 10;
+}
+
+/* =========================================
+   17. COMPACT BUTTON SIZE
+========================================= */
+
+.answer-btn.yes-btn,
+.answer-btn.no-btn {
+  min-height: 0;
+  height: 82px;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 55px;
+}
+
+@media (max-width: 600px) {
+  .answer-btn.yes-btn,
+  .answer-btn.no-btn {
+    height: 72px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
+/* =========================================
+   18. YES - SOFT SUBTLE PINK LIQUID
+========================================= */
+
+.answer-btn.yes-btn {
+  background: linear-gradient(
+    145deg,
+    #ff65b2 0%,
+    #ff2995 50%,
+    #ed238b 100%
+  );
+
+  box-shadow:
+    inset 0 2px 5px rgba(255,255,255,.3),
+    inset 0 -3px 8px rgba(180,0,90,.12),
+    0 8px 20px rgba(255,45,145,.22);
+}
+
+.answer-btn.yes-btn::after {
+  height: 42%;
+  bottom: -5px;
+  opacity: .48;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,205,230,.55),
+    rgba(255,150,200,.5),
+    rgba(255,220,240,.65)
+  );
+
+  box-shadow: 0 -3px 8px rgba(255,220,240,.18);
+  animation: softYesWater 4s ease-in-out infinite;
+}
+
+@keyframes softYesWater {
+  0%, 100% {
+    transform: translateY(3px) rotate(-1deg);
+    border-radius: 48% 52% 0 0;
+  }
+
+  50% {
+    transform: translateY(-4px) rotate(1deg);
+    border-radius: 53% 47% 0 0;
+  }
+}
+
+/* =========================================
+   19. NO - SAME AS CONTINUE BUTTON
+========================================= */
+
+.answer-btn.no-btn {
+  background: linear-gradient(
+    135deg,
+    #2878e8,
+    #1455c0
+  );
+
+  box-shadow:
+    inset 0 2px 5px rgba(255,255,255,.25),
+    0 8px 20px rgba(30,90,190,.2);
+}
+
+/* Remove liquid from NO */
+
+.answer-btn.no-btn::after {
+  display: none;
+}
+/* WELCOME PAGE FLOATING HEARTS */
+
+.welcome-decor {
+  position: relative;
+}
+
+.welcome-floating-hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.welcome-float-heart {
+  position: absolute;
+  bottom: -50px;
+  left: var(--heart-left);
+  font-size: var(--heart-size);
+  opacity: 0;
+  animation: welcomeHeartRise var(--heart-duration) linear
+    var(--heart-delay) infinite;
+  will-change: transform, opacity;
+}
+
+.wh1  { --heart-left: 5%;  --heart-size: 21px; --heart-duration: 10s; --heart-delay: 0s; }
+.wh2  { --heart-left: 13%; --heart-size: 26px; --heart-duration: 13s; --heart-delay: 2s; }
+.wh3  { --heart-left: 21%; --heart-size: 19px; --heart-duration: 11s; --heart-delay: 4s; }
+.wh4  { --heart-left: 29%; --heart-size: 24px; --heart-duration: 14s; --heart-delay: 1s; }
+.wh5  { --heart-left: 37%; --heart-size: 22px; --heart-duration: 12s; --heart-delay: 5s; }
+.wh6  { --heart-left: 45%; --heart-size: 18px; --heart-duration: 10s; --heart-delay: 3s; }
+.wh7  { --heart-left: 53%; --heart-size: 25px; --heart-duration: 13s; --heart-delay: 6s; }
+.wh8  { --heart-left: 61%; --heart-size: 20px; --heart-duration: 11s; --heart-delay: 2s; }
+.wh9  { --heart-left: 69%; --heart-size: 27px; --heart-duration: 15s; --heart-delay: 4s; }
+.wh10 { --heart-left: 77%; --heart-size: 19px; --heart-duration: 12s; --heart-delay: 7s; }
+.wh11 { --heart-left: 85%; --heart-size: 23px; --heart-duration: 10s; --heart-delay: 1s; }
+.wh12 { --heart-left: 93%; --heart-size: 21px; --heart-duration: 14s; --heart-delay: 5s; }
+.wh13 { --heart-left: 9%;  --heart-size: 18px; --heart-duration: 13s; --heart-delay: 8s; }
+.wh14 { --heart-left: 31%; --heart-size: 24px; --heart-duration: 12s; --heart-delay: 9s; }
+.wh15 { --heart-left: 57%; --heart-size: 20px; --heart-duration: 15s; --heart-delay: 3s; }
+.wh16 { --heart-left: 73%; --heart-size: 26px; --heart-duration: 11s; --heart-delay: 10s; }
+.wh17 { --heart-left: 89%; --heart-size: 19px; --heart-duration: 14s; --heart-delay: 6s; }
+.wh18 { --heart-left: 41%; --heart-size: 22px; --heart-duration: 13s; --heart-delay: 11s; }
+
+@keyframes welcomeHeartRise {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.85;
+  }
+
+  50% {
+    transform: translate3d(35px, -50vh, 0) rotate(25deg);
+    opacity: 0.8;
+  }
+
+  85% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translate3d(-25px, -110vh, 0) rotate(-25deg);
+    opacity: 0;
+  }
+}
+/* =========================================
+   12. FINAL NO BUTTON - SMOOTH MOVEMENT
+========================================= */
+
+#loveNo {
+  white-space: nowrap;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+
+  transition:
+    left .65s cubic-bezier(.22, 1, .36, 1),
+    top .65s cubic-bezier(.22, 1, .36, 1);
+
+  will-change: left, top;
+}

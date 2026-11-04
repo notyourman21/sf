@@ -1,0 +1,213 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Someone Special</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SKY AND CLOUDS -->
+  <div class="sky">
+    <div class="cloud cloud-one"></div>
+    <div class="cloud cloud-two"></div>
+    <div class="cloud cloud-three"></div>
+    <div class="cloud cloud-four"></div>
+  </div>
+
+  <!-- WELCOME SCREEN -->
+  <main class="main-content">
+    <section class="welcome-section">
+
+      <p class="eyebrow">A LITTLE SOMETHING FOR YOU</p>
+
+      <h1>To Someone Special</h1>
+
+      <p class="subtitle">
+        Some people make the world feel a little more beautiful.
+      </p>
+
+      <!-- NAME INPUT CARD -->
+      <div class="glass-card">
+
+        <!-- WELCOME TEDDIES -->
+        <div class="welcome-decor" aria-hidden="true">
+          <span class="welcome-bear">🐻</span>
+          <span class="welcome-bear">🐻‍❄️</span>
+        </div>
+
+        <label for="personName">This little surprise is for...</label>
+
+        <input
+          type="text"
+          id="personName"
+          placeholder="Enter your name..."
+          autocomplete="off"
+        >
+
+        <button id="continueBtn">Continue →</button>
+
+      </div>
+
+    </section>
+  </main>
+
+  <!-- WELCOME PAGE FLOATING HEARTS - OUTSIDE THE CARD -->
+  <div class="welcome-floating-hearts" aria-hidden="true">
+
+    <span class="welcome-float-heart wh1">💗</span>
+    <span class="welcome-float-heart wh2">💕</span>
+    <span class="welcome-float-heart wh3">💖</span>
+    <span class="welcome-float-heart wh4">❤️</span>
+    <span class="welcome-float-heart wh5">💞</span>
+    <span class="welcome-float-heart wh6">💓</span>
+    <span class="welcome-float-heart wh7">♡</span>
+    <span class="welcome-float-heart wh8">💝</span>
+    <span class="welcome-float-heart wh9">🩷</span>
+    <span class="welcome-float-heart wh10">💘</span>
+    <span class="welcome-float-heart wh11">💗</span>
+    <span class="welcome-float-heart wh12">💕</span>
+    <span class="welcome-float-heart wh13">❤️</span>
+    <span class="welcome-float-heart wh14">💖</span>
+    <span class="welcome-float-heart wh15">💞</span>
+    <span class="welcome-float-heart wh16">💓</span>
+    <span class="welcome-float-heart wh17">♡</span>
+    <span class="welcome-float-heart wh18">💝</span>
+
+  </div>
+
+  <!-- QUESTION SCENE -->
+  <section class="second-scene" id="secondScene">
+
+    <!-- HEART DECORATIONS -->
+    <div class="floating-decor" aria-hidden="true">
+
+      <span class="float-heart h1">💗</span>
+      <span class="float-heart h2">💕</span>
+      <span class="float-heart h3">♡</span>
+      <span class="float-heart h4">💖</span>
+      <span class="float-heart h5">💞</span>
+      <span class="float-heart h6">💓</span>
+      <span class="float-heart h7">❤️</span>
+
+      <span class="float-heart h8">💗</span>
+      <span class="float-heart h9">💕</span>
+      <span class="float-heart h10">♡</span>
+      <span class="float-heart h11">💖</span>
+      <span class="float-heart h12">💞</span>
+      <span class="float-heart h13">💓</span>
+      <span class="float-heart h14">❤️</span>
+
+    </div>
+
+    <!-- QUESTION CARD -->
+    <div class="question-card">
+
+      <p class="question-number">QUESTION 01 · ❤️</p>
+
+      <h2 id="questionText">
+        Do you know how special you are to me?
+      </h2>
+
+      <!-- QUESTION 1 OPTIONS -->
+      <div class="answer-options" id="answerOptions">
+
+        <button class="answer-btn yes-btn" id="yesBtn">
+          Yes, I know <span class="button-heart">💗</span>
+        </button>
+
+        <button class="answer-btn no-btn" id="noBtn">
+          No, I don't 💔
+        </button>
+
+      </div>
+
+      <!-- PERCENTAGE GAME -->
+      <div class="percentage-game" id="percentageGame">
+
+        <input
+          type="number"
+          id="percentageInput"
+          min="0"
+          max="100"
+          placeholder="Enter your guess..."
+        >
+
+        <button class="answer-btn yes-btn" id="submitGuess">
+          Submit my guess <span class="button-heart">💗</span>
+        </button>
+
+      </div>
+
+      <!-- QUESTION 3 -->
+      <div class="question-three" id="questionThree">
+
+        <button class="answer-btn yes-btn" id="optionA">
+          You, obviously! <span class="button-heart">💗</span>
+        </button>
+
+        <button class="answer-btn no-btn" id="optionB">
+          Someone else? 👀
+        </button>
+
+      </div>
+
+      <!-- FINAL QUESTION -->
+      <div class="final-question" id="finalQuestion">
+
+        <h2>Do you love me? 🥺</h2>
+
+        <div class="final-options">
+
+          <button class="answer-btn yes-btn" id="loveYes">
+            Yes, I do! <span class="button-heart">💗</span>
+          </button>
+
+          <button class="answer-btn no-btn" id="loveNo">
+            No 🙈
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TEDDY BEARS: FOREGROUND LAYER -->
+    <div class="bear-layer" aria-hidden="true">
+      <div class="bear bear-left">🐻</div>
+      <div class="bear bear-right">🐻‍❄️</div>
+    </div>
+
+  </section>
+
+  <!-- FIREWORKS AND CELEBRATION -->
+  <canvas id="fireworksCanvas"></canvas>
+
+  <section class="celebration-screen" id="celebrationScreen">
+
+    <div class="celebration-card">
+
+      <div class="celebration-sparkle">✨ 💖 ✨</div>
+
+      <h2>Yayyy! You made my day! 🥹</h2>
+
+      <p id="celebrationMessage">
+        A little moment, a beautiful memory. ❤️
+      </p>
+
+      <p class="celebration-caption">
+        Some feelings deserve their own little celebration. 🎆
+      </p>
+
+    </div>
+
+  </section>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
+```
